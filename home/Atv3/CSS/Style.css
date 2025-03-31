@@ -1,0 +1,99 @@
+@font-face {
+    font-family: 'Cogley';
+    src: url('fonts/Cogley TTF.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    background-color: #f0f0f0;
+    font-family: 'Cogley';
+    font-size: 25px;
+}
+
+.header {
+    background: linear-gradient(to right, pink, rgb(247, 199, 241));
+    padding: 20px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.3);
+}
+
+.header img {
+    position: absolute;
+    left: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 40px 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+.option {
+    width: 250px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 10px 10px 7px rgb(233, 153, 187);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+}
+
+.option img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.option:hover {
+    transform: scale(1.1);
+    opacity: 0.7;
+}
+
+.footer {
+    padding: 20px;
+    background: linear-gradient(to right, pink, rgb(247, 199, 241));
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    box-shadow: -10px -10px 7px rgba(0, 0, 0, 0.3);
+}
