@@ -62,19 +62,19 @@ body, html {
     padding: 20px;
 }
 
-/* Estilos para o jogo */
 .game {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 colunas */
-    grid-gap: 20px; /* Espaçamento entre as cartas */
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
     width: 100%;
-    max-width: 960px; /* Limita a largura total das cartas */
+    max-width: 960px;
     margin: 0 auto;
 }
 .card {
     width: 120px;
     height: 120px;
-    background-color: pink;  /* Cor de fundo para as cartas */
+    box-shadow: 10px 10px 7px rgb(233, 153, 187);
+    background-color: pink;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -87,18 +87,18 @@ body, html {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: none;  /* Imagem ficará oculta até o clique */
-}
+    display: none;
 
 .card.flipped img {
-    display: block;  /* Imagem visível quando a carta virar */
+    display: block;
 }
 .card:hover {
     transform: scale(1.1);
     opacity: 0.7;
 }
 
-/* Estilos para o menu inicial */
+}
+
 .menu-container {
     display: flex;
     justify-content: center;

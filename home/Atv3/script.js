@@ -1,17 +1,28 @@
 document.addEventListener("DOMContentLoaded", function() {
     console.log("DOM totalmente carregado!");
 
+    // Função para redirecionar para as páginas com base na categoria escolhida
     const menuOptions = document.querySelectorAll(".option");
 
-    // Verifique se existem opções no menu
     if (menuOptions.length > 0) {
         menuOptions.forEach(option => {
             option.addEventListener("click", function() {
-                const category = option.getAttribute("data-category"); // Pega a categoria clicada
+                const category = option.getAttribute("data-category");
                 if (category) {
-                    // Redireciona para a página correta baseada na categoria
-                    window.location.href = `${category}.html`; // Vai para carro.html, moto.html ou bike.html
+
+                    window.location.href = `${category}.html`;
                 }
+            });
+        });
+    }
+
+    if (document.getElementById("game")) {
+        const cards = document.querySelectorAll(".card");
+
+
+        cards.forEach(card => {
+            card.addEventListener("click", function() {
+                flipCard(card);
             });
         });
     }
@@ -28,19 +39,18 @@ function createGame(images) {
     gameContainer.style.maxWidth = "90%";
     gameContainer.style.margin = "auto";
 
-    // Criar 8 cartas e adicionar a imagem da categoria
+
     for (let i = 0; i < 8; i++) {
         const card = document.createElement("div");
         card.classList.add("card");
         card.dataset.id = i;
 
         const img = document.createElement("img");
-        img.src = images[i]; // A imagem da carta
+        img.src = images[i];
         img.alt = `Imagem ${i + 1}`;
-        img.classList.add("card-image"); // Adicionando uma classe para manipulação de imagem
+        img.classList.add("card-image");
         card.appendChild(img);
 
-        // Adiciona o evento de clique para virar a carta
         card.addEventListener("click", () => flipCard(card));
 
         gameContainer.appendChild(card);
@@ -48,12 +58,15 @@ function createGame(images) {
 }
 
 function flipCard(card) {
-    const img = card.querySelector("img");
+
     if (card.classList.contains("flipped")) {
-        card.classList.remove("flipped"); // Volta a carta ao estado inicial
-        img.style.display = "none"; // Esconde a imagem
+        card.classList.remove("flipped");
+        const img = card.querySelector("img");
+        img.style.display = "none";
     } else {
-        card.classList.add("flipped"); // Vira a carta
-        img.style.display = "block"; // Exibe a imagem
+
+        card.classList.add("flipped");
+        const img = card.querySelector("img");
+        img.style.display = "block";
     }
 }
