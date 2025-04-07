@@ -1,9 +1,11 @@
 body {
     margin: 0;
     padding: 0;
-    background: url('image/background.png');
+    height: 100vh;
+    background-image: url("../image/background.png");
     background-size: cover;
-    min-height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .margem1 {
