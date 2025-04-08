@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+  }
+
+  .tela {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100vh;
+  }
+
+  .lado-imagem {
+    background-image: url("../image/scotland_yard.png");
+    background-size: cover;
+    background-position: right;
+  }
+
+  .lado-login {
+    background-color: #ffffff;
+    display: grid;
+    margin-left: 12%;
+    margin-top: 15%;
+  }
+  .titulo{
+      margin-bottom: 20px;
+      color: darkblue;
+    }
+    .subtitulo{
+        margin-bottom: 20px;
+        color: darkred;
+    }
+
+    .rotulo {
+      color: darkred;
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 5px;
+      display: block;
+      text-align: left;
+    }
+    .campo {
+    width: 85%;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .linha-entrar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 85%;
+  }
+
+  .botao {
+    background-color: darkblue;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .botao:hover {
+    background-color: darkblue;
+  }
+
+  .esqueci-senha {
+    font-size: 14px;
+    color: darkgoldenrod;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  hr{
+    width: 85%;
+    height:3px;
+    background-color:darkblue;
+  }
+
+  .area-icones {
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+    gap: 30px;
+    justify-items: center;
+    margin-top: 30px;
+  }
+
+  .icone {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .tela {
+      grid-template-columns: 1fr;
+    }
+
+    .lado-imagem {
+      display: none !important;
+    }
+
+    .lado-login {
+      margin: 0 !important;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+    }
+    .area-icones {
+        display: grid;
+        grid-template-columns: repeat(3, 150px);
+        justify-items: left;
+        right: 15px;
+        margin-top: 30px;
+      }
+
+      .icone {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+
+      }
+  }
+
