@@ -6,7 +6,7 @@
 
   body {
     height: 100%;
-    font-family: Arial, sans-serif;
+    font-family: 'Times New Roman', serif;
   }
 
   .tela {
@@ -32,6 +32,7 @@
       color: darkblue;
     }
     .subtitulo{
+      font-family: 'Times New Roman', serif;
         margin-bottom: 20px;
         color: darkred;
     }
