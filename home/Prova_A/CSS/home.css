@@ -1,7 +1,7 @@
-* {
+* { /* reset básico*/
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /*largura e altura incluindo as bordas e o preenchimento*/
   }
 
   body {
@@ -41,7 +41,7 @@
     margin: 0 auto;
 }
 
-.esquerda, .direita {
+.esquerda, .direita { 
     color: darkred;
     animation: animarCores 2s infinite;
     font-weight: bold;
@@ -103,7 +103,7 @@
     color: darkred;
   }
 
-  tbody tr:nth-child(even) {
+  tbody tr:nth-child(even) { /*Seleciona todas as linhas pares da tabela*/
       background-color: #e8f0ff;
     }
     .rodape {
@@ -123,13 +123,13 @@
         position: absolute;
         width: 36px;
         height: 36px;
-        animation: voar 8s ease-in-out infinite;
+        animation: voar 8s ease-in-out infinite; /*ease-in-out infinite = repete infinitamente */
 
       }
 
       .aviao.esquerda {
         left: 50%;
-        transform: translateX(-50%) scaleX(1);
+        transform: translateX(-50%) scaleX(1);/*mover o alemento*/
       }
 
       .aviao.direita {
@@ -189,7 +189,8 @@
         height: 100%;
         fill: #FFF;
       }
-  @media (max-width: 768px) {
+
+  @media (max-width: 768px) { /*@media = responsividade*/
 
     .cabecalho {
       padding: 10px 0;

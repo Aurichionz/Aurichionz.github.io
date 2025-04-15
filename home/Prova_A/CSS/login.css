@@ -68,7 +68,6 @@
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 16px;
-    cursor: pointer;
   }
 
   .botao:hover {
@@ -83,12 +82,6 @@
     margin-left: 10px;
   }
 
-  hr{
-    width: 85%;
-    height:3px;
-    background-color:darkblue;
-  }
-
   .area-icones {
     display: grid;
     grid-template-columns: repeat(3, 150px);
@@ -100,10 +93,9 @@
   .icone {
     width: 40px;
     height: 40px;
-    cursor: pointer;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 768px) { /*responsividade*/
     .tela {
       grid-template-columns: 1fr;
     }
