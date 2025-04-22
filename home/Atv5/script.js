@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Elementos DOM
     const flexContainer = document.getElementById('flexContainer');
     const flexItems = document.querySelectorAll('.flex-item');
-    const formatoSelect = document.getElementById('formato');
+    const cores = document.querySelectorAll('.cor');
+    const formatos = document.querySelectorAll('.formato');
     const tamanhoInput = document.getElementById('tamanho');
     const flexDirectionSelect = document.getElementById('flexDirection');
     const justifyContentSelect = document.getElementById('justifyContent');
@@ -10,30 +11,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Funções de atualização
     function atualizarFormato() {
-        const formato = formatoSelect.value;
+        const formato = document.querySelector('.formato.selecionado').dataset.formato;
         flexItems.forEach(item => {
-            item.style.borderRadius = formato === 'circulo' ? '50%' : '4px';
+            item.style.borderRadius = formato === 'circulo' ? '50%' : '0';
         });
     }
 
     function atualizarTamanho() {
         let tamanho = parseInt(tamanhoInput.value);
         
-        // Validação do valor
         if (isNaN(tamanho)) {
-            tamanho = 60; // Valor padrão se inválido
+            tamanho = 60; // Valor padrão
         } else {
-            tamanho = Math.max(50, Math.min(120, tamanho)); // Limita entre 50 e 120
+            tamanho = Math.max(30, Math.min(120, tamanho)); // Limite entre 30 e 120
         }
         
-        // Atualiza o valor no input (caso tenha sido corrigido)
         tamanhoInput.value = tamanho;
         
-        // Aplica o tamanho aos itens
         const tamanhoCompleto = tamanho + 'px';
         flexItems.forEach(item => {
             item.style.width = tamanhoCompleto;
             item.style.height = tamanhoCompleto;
+        });
+    }
+
+    function atualizarCor(cor) {
+        flexItems.forEach(item => {
+            item.style.backgroundColor = cor;
         });
     }
 
@@ -43,25 +47,42 @@ document.addEventListener('DOMContentLoaded', function() {
         flexContainer.style.alignItems = alignItemsSelect.value;
     }
 
-    // Event listeners
-    formatoSelect.addEventListener('change', atualizarFormato);
-    
-    tamanhoInput.addEventListener('input', function(e) {
-        // Permite apenas números e teclas de controle
-        if (['e', 'E', '+', '-'].includes(e.key)) {
-            e.preventDefault();
-        }
+    // Event listeners para formato e cor
+    formatos.forEach(item => {
+        item.addEventListener('click', function() {
+            // Remover a classe 'selecionado' de todos os itens
+            formatos.forEach(el => el.classList.remove('selecionado'));
+            // Adicionar a classe 'selecionado' no item clicado
+            item.classList.add('selecionado');
+            atualizarFormato();
+        });
+    });
+
+    cores.forEach(cor => {
+        cor.addEventListener('click', function() {
+            const corSelecionada = cor.style.backgroundColor;
+            atualizarCor(corSelecionada);
+
+            // Remover a classe 'selecionado' de todas as cores
+            cores.forEach(c => c.classList.remove('selecionado'));
+            // Adicionar a classe 'selecionado' na cor clicada
+            cor.classList.add('selecionado');
+        });
+    });
+
+    // Event listeners de tamanho
+    tamanhoInput.addEventListener('input', function() {
         atualizarTamanho();
     });
-    
-    tamanhoInput.addEventListener('change', atualizarTamanho);
+
     tamanhoInput.addEventListener('blur', function() {
-        if (tamanhoInput.value === '') {
+        if (!tamanhoInput.value) {
             tamanhoInput.value = 60;
             atualizarTamanho();
         }
     });
 
+    // Event listeners de flexbox
     flexDirectionSelect.addEventListener('change', atualizarFlex);
     justifyContentSelect.addEventListener('change', atualizarFlex);
     alignItemsSelect.addEventListener('change', atualizarFlex);
