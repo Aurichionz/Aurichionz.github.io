@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Instituto Federal</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Ícones do Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+</head>
+<body class="bg-light">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Área de Login (Esquerda) -->
+            <div class="col-md-6 d-flex align-items-center justify-content-center vh-100">
+                <div class="w-100 px-4 px-md-5" style="max-width: 500px;">
+                    <div class="card shadow">
+                        <div class="card-body p-4 p-md-5">
+                            <h2 class="mb-1">Login</h2>
+                            <p class="text-muted mb-4">Faça o login para continuar</p>
+                            
+                            <form>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">E-mail</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Senha</label>
+                                    <input type="password" class="form-control" id="password" placeholder="Digite sua senha" required>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <button type="submit" class="btn btn-primary px-4">Logar</button>
+                                    <a href="#" class="text-decoration-none">Esqueceu a senha?</a>
+                                </div>
+                            </form>
+                            
+                            <!-- Logos de Apps SEM FUNDO usando apenas Bootstrap -->
+                            <div class="d-flex justify-content-center gap-4 mt-4">
+                                <a href="#" class="text-decoration-none">
+                                    <i class="bi bi-facebook text-primary fs-3"></i>
+                                </a>
+                                <a href="#" class="text-decoration-none">
+                                    <i class="bi bi-google text-danger fs-3"></i>
+                                </a>
+                                <a href="#" class="text-decoration-none">
+                                    <i class="bi bi-twitter text-info fs-3"></i>
+                                </a>
+                                <a href="#" class="text-decoration-none">
+                                    <i class="bi bi-linkedin text-primary fs-3"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Área da Logo (Direita) - Fundo azul com nova logo -->
+            <div class="col-md-6 d-none d-md-flex bg-primary vh-100">
+                <div class="d-flex align-items-center justify-content-center w-100">
+                    <img src="c:\Users\vinic.VASCO\Downloads\ckan-logo.png" alt="Logo IFPR" class="img-fluid w-50">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
