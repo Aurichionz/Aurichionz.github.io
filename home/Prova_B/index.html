@@ -57,22 +57,35 @@
   display: block;
     color:white;
 }
-
-    .spaceship {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-    }
-
-    .missile {
+.spaceship-container {
   position: absolute;
-  width: 2px;
-  height: 10px;
-  background: red;
-  z-index: 10;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: auto;
 }
+
+.spaceship {
+  width: 100px;
+  display: block;
+}
+
+.missil-fixo {
+  position: absolute;
+  width: 16px;
+  bottom: 10px;
+  transition: bottom 0.2s;
+}
+
+#missil1 {
+  left: 20px;
+}
+
+#missil2 {
+  right: 20px;
+}
+
 
 /* Tela de pause */
 .pause-overlay {
@@ -110,7 +123,12 @@
               <span class="hud-text">ALIEN: 0</span>
             </div>
           </div>
+
+       <div class="spaceship-container">
     <img src="image/nave.png" alt="Nave principal" class="spaceship">
+    <img src="image/missil.png" class="missil-fixo" id="missil1">
+    <img src="image/missil.png" class="missil-fixo" id="missil2">
+  </div>
   </div>
 
 </body>
@@ -167,30 +185,52 @@
         shootMissile();
       }
     });
-  
-    function shootMissile() {
-      const missile = document.createElement('div');
-      missile.classList.add('missile');
-      document.body.appendChild(missile);
-  
-      const shipRect = spaceship.getBoundingClientRect();
-      missile.style.left = `${shipRect.left + shipRect.width / 2 - 1}px`;
-      missile.style.top = `${shipRect.top - 10}px`;
-  
-      let y = shipRect.top - 10;
-      const missileInterval = setInterval(() => {
-        if (isPaused) return;
-        y -= 10;
-        if (y < 0) {
-          missile.remove();
-          clearInterval(missileInterval);
-        } else {
-          missile.style.top = `${y}px`;
-        }
-      }, 30);
+
+let misseisDisponiveis = 2;
+
+function shootMissile() {
+  if (misseisDisponiveis <= 0) return;
+
+  const id = misseisDisponiveis === 2 ? 'missil1' : 'missil2';
+  const missil = document.getElementById(id);
+
+  // Remove o míssil da nave e dispara
+  const rect = missil.getBoundingClientRect();
+  const missileClone = document.createElement('img');
+  missileClone.src = "image/missil.png";
+  missileClone.className = 'missile';
+  missileClone.style.left = `${rect.left}px`;
+  missileClone.style.top = `${rect.top}px`;
+  missileClone.style.position = 'absolute';
+  missileClone.style.width = '16px';
+  document.body.appendChild(missileClone);
+
+  // Esconde o míssil da nave
+  missil.style.visibility = 'hidden';
+
+  let y = rect.top;
+  const interval = setInterval(() => {
+    if (isPaused) return;
+    y -= 10;
+    if (y < 0) {
+      clearInterval(interval);
+      missileClone.remove();
+    } else {
+      missileClone.style.top = `${y}px`;
     }
-  
+  }, 30);
+
+  misseisDisponiveis--;
+
+  // Recarregar os dois após 2 segundos
+  if (misseisDisponiveis === 0) {
+    setTimeout(() => {
+      document.getElementById('missil1').style.visibility = 'visible';
+      document.getElementById('missil2').style.visibility = 'visible';
+      misseisDisponiveis = 2;
+    }, 2000);
+  }
+}
     startTimer();
   </script>
-  
 </html>
