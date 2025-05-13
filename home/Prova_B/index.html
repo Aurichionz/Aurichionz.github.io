@@ -86,6 +86,27 @@
   right: 20px;
 }
 
+.alien {
+  position: absolute;
+  width: 60px;
+  transition: top 0.1s linear;
+  z-index: 2;
+}
+
+.fase-overlay, .vida-overlay {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  font-weight: bold;
+  color: white;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 20px 40px;
+  border-radius: 15px;
+  display: none;
+  z-index: 100;
+}
 
 /* Tela de pause */
 .pause-overlay {
@@ -108,6 +129,8 @@
 </head>
 <body>
     <div class="pause-overlay" id="pauseOverlay">GAME PAUSED</div>
+   <div class="fase-overlay" id="faseOverlay">FASE 1</div>
+<div class="vida-overlay" id="vidaOverlay">Você perdeu uma vida!</div>
     <div class="background">
         <div class="hud">
             <div class="hud-item">
@@ -140,7 +163,19 @@
     const timeDisplay = document.getElementById('hud-time');
     const spaceship = document.querySelector('.spaceship');
     const pauseOverlay = document.getElementById('pauseOverlay');
-  
+  let aliensDestruidos = 0;
+let vidas = 3;
+let fase = 1;
+
+const alienCounter = document.querySelectorAll('.hud-text')[2];
+const vidaCounter = document.querySelectorAll('.hud-text')[1];
+const faseOverlay = document.getElementById('faseOverlay');
+const vidaOverlay = document.getElementById('vidaOverlay');
+
+function atualizarHUD() {
+  alienCounter.textContent = `ALIEN: ${aliensDestruidos}`;
+  vidaCounter.textContent = `LIFE: ${vidas}`;
+}
     function startTimer() {
       intervalId = setInterval(() => {
         if (!isPaused && seconds < 60) {
@@ -230,7 +265,104 @@ function shootMissile() {
       misseisDisponiveis = 2;
     }, 2000);
   }
+}function criarAliens() {
+  const centroX = window.innerWidth / 2;
+  const offset = 70;
+
+  for (let i = -1; i <= 1; i++) {
+    const alien = document.createElement('img');
+    alien.src = 'image/alien.png';
+    alien.className = 'alien';
+    alien.style.top = '-60px';
+    alien.style.left = `${centroX + i * offset - 30}px`; // 30 = metade da largura do alien
+    document.body.appendChild(alien);
+
+    moverAlien(alien);
+  }
+}function moverAlien(alien) {
+  let y = -60;
+
+  const interval = setInterval(() => {
+    if (isPaused) return;
+
+    y += 4 + fase; // aumenta velocidade a cada fase
+    alien.style.top = `${y}px`;
+
+    const naveRect = spaceship.getBoundingClientRect();
+    const alienRect = alien.getBoundingClientRect();
+
+    if (colidiu(alienRect, naveRect)) {
+      clearInterval(interval);
+      alien.remove();
+      perderVida();
+    }
+
+    if (y > window.innerHeight) {
+      clearInterval(interval);
+      alien.remove();
+    }
+  }, 30);
+}function colidiu(a, b) {
+  return !(
+    a.bottom < b.top ||
+    a.top > b.bottom ||
+    a.right < b.left ||
+    a.left > b.right
+  );
+}// Verifica colisão com aliens
+document.querySelectorAll('.alien').forEach(alien => {
+  const alienRect = alien.getBoundingClientRect();
+  const missileRect = missileClone.getBoundingClientRect();
+
+  if (colidiu(missileRect, alienRect)) {
+    clearInterval(interval);
+    missileClone.remove();
+    alien.remove();
+    aliensDestruidos++;
+    atualizarHUD();
+
+    if (aliensDestruidos >= 3) {
+      passarDeFase();
+    }
+  }
+});function perderVida() {
+  vidas--;
+  atualizarHUD();
+  vidaOverlay.style.display = 'block';
+  setTimeout(() => {
+    vidaOverlay.style.display = 'none';
+    resetarFase();
+  }, 2000);
+
+  if (vidas <= 0) {
+    alert("GAME OVER");
+    location.reload();
+  }
 }
+
+function passarDeFase() {
+  fase++;
+  aliensDestruidos = 0;
+  atualizarHUD();
+
+  faseOverlay.textContent = `FASE ${fase}`;
+  faseOverlay.style.display = 'block';
+  setTimeout(() => {
+    faseOverlay.style.display = 'none';
+    resetarFase();
+  }, 2000);
+}
+
+function resetarFase() {
+  // Remove todos os aliens
+  document.querySelectorAll('.alien').forEach(alien => alien.remove());
+  // Centraliza nave
+  posX = window.innerWidth / 2;
+  spaceship.style.left = `${posX}px`;
+  // Cria novos aliens
+  setTimeout(criarAliens, 1000);
+}atualizarHUD();
+criarAliens();
     startTimer();
   </script>
 </html>
