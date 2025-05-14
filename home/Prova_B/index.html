@@ -409,7 +409,7 @@ document.addEventListener("keydown", function(event) {
 
       gameState.active = false;
       gameStats.lives--;
-      elements.livesDisplay.textContent = "Lives: " + gameStats.lives;
+      elements.livesDisplay.textContent = "LIFE: " + gameStats.lives;
 
       for (let id in aliens.intervals) {
         clearInterval(aliens.intervals[id]);
