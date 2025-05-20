@@ -1,0 +1,33 @@
+@charset "UTF-8";
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: 3fr 2fr;
+  grid-template-columns: 2fr 3fr;
+  grid-template-areas: "form table" "graph table"; /* 2ª linha */
+}
+
+nav {
+  grid-area: form;
+  background-color: white;
+  border-right: 1px solid #AAA;
+  border-bottom: 1px solid #AAA;
+}
+
+main {
+  grid-area: table;
+  background-color: white;
+  margin-left: 10px;
+}
+
+section {
+  grid-area: graph;
+  background-color: white;
+  border-right: 1px solid #AAA;
+}/*# sourceMappingURL=style.css.map */

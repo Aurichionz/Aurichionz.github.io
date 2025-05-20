@@ -1,0 +1,38 @@
+
+$border-color: #AAA;
+$fonte: "'Courier New', Courier, monospace";
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: 3fr 2fr;
+    grid-template-columns: 2fr 3fr;
+    grid-template-areas:
+        'form table' /* 1ª linha */
+        'graph table'; /* 2ª linha */
+}
+
+nav {
+    grid-area: form;
+    background-color: white;
+    border-right: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+}
+
+main {
+    grid-area: table;
+    background-color: white;
+    margin-left: 10px;
+}
+
+section {
+    grid-area: graph;
+    background-color: white;
+    border-right: 1px solid $border-color;
+}
