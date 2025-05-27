@@ -1,16 +1,31 @@
 function drawChart() {
-  var data = google.visualization.arrayToDataTable([
-  ['Element', { role: 'style' }], // Nome da coluna e papel da próxima (estilo)
-  ['Agentes', data_agents.length, 'blue'], // Nome do elemento, valor, cor
-  ['Regionais', data_regionals.length, 'orange'],
-  ['Temas', data_subjects.length, 'green'],
-  ['Relatórios', data_reports.length, 'red'] // CSS-style declaration (cor)
-  ]);
-  
-  var options = {
-  legend: { position: 'none' } // Oculta a legenda
-  };
-  
-  var chart = new google.visualization.ColumnChart(document.getElementById('chart1'));
-  chart.draw(data, options);
-  }
+    const data = google.visualization.arrayToDataTable([
+        ['Tipo', 'Quantidade', { role: 'style' }],
+        ['Assuntos', subjects.length, '#a8c7f7'],
+        ['Regionais', regionals.length, '#fdf1a5'],
+        ['Agentes', agents.length, '#a8f7c7'],
+        ['Relatórios', reports.length, '#f7a8a8']
+    ]);
+
+    const options = {
+        title: 'Quantidade de Dados Cadastrados',
+        legend: { position: "none" },
+        chartArea: { width: '70%', height: '70%' },
+        vAxis: {
+            minValue: 0,
+            format: '0',
+            gridlines: { count: 6 }
+        },
+        hAxis: {
+        },
+        animation: {
+            duration: 500,
+            easing: 'out',
+            startup: true
+        }
+    };
+
+    const chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+    chart.draw(data, options);
+}
+

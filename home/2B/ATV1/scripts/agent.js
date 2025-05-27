@@ -1,44 +1,39 @@
-const data_agents = [];
+const agents = [];
 
 function addAgent() {
-  const form = document.querySelector('#formAgent');
-  const nome = form.querySelector('input[name="nome"]');
-  const regionalSelect = form.querySelector('select[name="regional"]');
+    const agentName = document.querySelector('#floatingInputAgent').value;
+    const regionalSelect = document.querySelector('#select_regional');
+    const selectedRegional = regionalSelect.options[regionalSelect.selectedIndex].text;
 
-  const newAgent = {
-    id: data_agents.length + 1,
-    nome: nome.value,
-    regional: regionalSelect.value
-  };
-
-  data_agents.push(newAgent);
-  addTableAgent(newAgent);
-  addSelectAgent(newAgent);
-  drawChart();
-  form. reset();
+    if (agentName && selectedRegional !== "Regional") {
+        const agentObject = { id: agents.length + 1, name: agentName, regional: selectedRegional };
+        agents.push(agentObject);
+        addTableAgent(agentObject);
+        updateAgentSelect();
+        document.querySelector('#floatingInputAgent').value = '';
+        drawChart();
+    } else {
+        alert("Por favor, preencha todos os campos do agente.");
+    }
 }
 
-function addTableAgent(agent) {
-  const table = document.querySelector('#table_agent');
-  const line = document.createElement('tr');
-
-  const colId = document.createElement('td');
-  colId.textContent = agent.id;
-  const colNome = document.createElement('td');
-  colNome.textContent = agent.nome;
-  const colRegional = document.createElement('td');
-  colRegional.textContent = agent.regional;
-
-  line.appendChild(colId);
-  line.appendChild(colNome);
-  line.appendChild(colRegional);
-  table.appendChild(line);
+function addTableAgent(object) {
+    const tableBody = document.getElementById('table_agent').getElementsByTagName('tbody')[0];
+    const newRow = tableBody.insertRow();
+    newRow.innerHTML = `
+        <td>${object.id}</td>
+        <td>${object.name}</td>
+        <td>${object.regional}</td>
+    `;
 }
 
-function addSelectAgent(agent) {
-  const select = document.querySelector('#select_agent');
-  const option = document.createElement('option');
-  option.textContent = agent.nome;
-  option.value = agent.nome;
-  select.appendChild(option);
+function updateAgentSelect() {
+    const agentSelect = document.getElementById('select_agent');
+    agentSelect.innerHTML = '<option selected disabled>Agente</option>';
+    agents.forEach(agent => {
+        const option = document.createElement('option');
+        option.value = agent.id;
+        option.textContent = agent.name;
+        agentSelect.appendChild(option);
+    });
 }

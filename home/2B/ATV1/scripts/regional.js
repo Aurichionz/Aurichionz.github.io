@@ -1,44 +1,38 @@
-const data_regionals = [];
+const regionals = []; // Array para armazenar as regionais
 
 function addRegional() {
-  const form = document.querySelector('#formRegional');
-  const sigla = form.querySelector('input[name="sigla"]');
-  const cidade = form.querySelector('input[name="cidade"]');
-
-  const newRegional = {
-    id: data_regionals.length + 1,
-    sigla: sigla.value,
-    cidade: cidade.value
-  };
-
-  data_regionals.push(newRegional);
-  addTableRegional(newRegional);
-  addSelectRegional(newRegional);
-  drawChart()
-  form.reset();
+    const regionalSigla = document.querySelector('#floatingInputRegionalSigla').value;
+    const regionalCity = document.querySelector('#floatingInputRegionalCidade').value;
+    if (regionalSigla && regionalCity) {
+        const regionalObject = { id: regionals.length + 1, sigla: regionalSigla, cidade: regionalCity };
+        regionals.push(regionalObject);
+        addTableRegional(regionalObject);
+        updateRegionalSelect();
+        document.querySelector('#floatingInputRegionalSigla').value = '';
+        document.querySelector('#floatingInputRegionalCidade').value = '';
+        drawChart();
+    } else {
+        alert("Por favor, preencha todos os campos da regional.");
+    }
 }
 
-function addTableRegional(regional) {
-  const table = document.querySelector('#table_regional');
-  const line = document.createElement('tr');
-
-  const colId = document.createElement('td');
-  colId.textContent = regional.id;
-  const colSigla = document.createElement('td');
-  colSigla.textContent = regional.sigla;
-  const colCidade = document.createElement('td');
-  colCidade.textContent = regional.cidade;
-
-  line.appendChild(colId);
-  line.appendChild(colSigla);
-  line.appendChild(colCidade);
-  table.appendChild(line);
+function addTableRegional(object) {
+    const tableBody = document.getElementById('table_regional').getElementsByTagName('tbody')[0];
+    const newRow = tableBody.insertRow();
+    newRow.innerHTML = `
+        <td>${object.id}</td>
+        <td>${object.sigla}</td>
+        <td>${object.cidade}</td>
+    `;
 }
 
-function addSelectRegional(regional) {
-  const select = document.querySelector('#select_regional');
-  const option = document.createElement('option');
-  option.textContent = regional.sigla;
-  option.value = regional.sigla;
-  select.appendChild(option);
+function updateRegionalSelect() {
+    const regionalSelect = document.getElementById('select_regional');
+    regionalSelect.innerHTML = '<option selected disabled>Regional</option>';
+    regionals.forEach(regional => {
+        const option = document.createElement('option');
+        option.value = regional.sigla;
+        option.textContent = regional.sigla;
+        regionalSelect.appendChild(option);
+    });
 }

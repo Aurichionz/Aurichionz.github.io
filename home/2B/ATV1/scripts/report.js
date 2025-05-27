@@ -1,40 +1,30 @@
-const data_reports = [];
+const reports = [];
 
 function addReport() {
-  const form = document.querySelector('#formReport');
-  const data = form.querySelector('input[name="data"]');
-  const assuntoSelect = form.querySelector('select[name="assunto"]');
-  const agenteSelect = form.querySelector('select[name="agente"]');
+    const reportDate = document.querySelector('#floatingInputReportDate').value;
+    const subjectSelect = document.querySelector('#select_subject');
+    const selectedSubject = subjectSelect.options[subjectSelect.selectedIndex].text;
+    const agentSelect = document.querySelector('#select_agent');
+    const selectedAgent = agentSelect.options[agentSelect.selectedIndex].text;
 
-  const newReport = {
-    id: data_reports.length + 1,
-    data: data.value,
-    assunto: assuntoSelect.value,
-    agente: agenteSelect.value
-  };
-
-  data_reports.push(newReport);
-  addTableReport(newReport);
-  drawChart()
-  form.reset();
+    if (reportDate && selectedSubject !== "Assunto" && selectedAgent !== "Agente") {
+        const reportObject = { id: reports.length + 1, date: reportDate, subject: selectedSubject, agent: selectedAgent };
+        reports.push(reportObject);
+        addTableReport(reportObject);
+        document.querySelector('#floatingInputReportDate').value = '';
+        drawChart();
+    } else {
+        alert("Por favor, preencha todos os campos do relatório.");
+    }
 }
 
-function addTableReport(report) {
-  const table = document.querySelector('#table_report');
-  const line = document.createElement('tr');
-
-  const colId = document.createElement('td');
-  colId.textContent = report.id;
-  const colData = document.createElement('td');
-  colData.textContent = report.data;
-  const colAssunto = document.createElement('td');
-  colAssunto.textContent = report.assunto;
-  const colAgente = document.createElement('td');
-  colAgente.textContent = report.agente;
-
-  line.appendChild(colId);
-  line.appendChild(colData);
-  line.appendChild(colAssunto);
-  line.appendChild(colAgente);
-  table.appendChild(line);
+function addTableReport(object) {
+    const tableBody = document.getElementById('table_report').getElementsByTagName('tbody')[0];
+    const newRow = tableBody.insertRow();
+    newRow.innerHTML = `
+        <td>${object.id}</td>
+        <td>${object.date}</td>
+        <td>${object.subject}</td>
+        <td>${object.agent}</td>
+    `;
 }
