@@ -1,0 +1,48 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas: "entrada saida";
+}
+
+aside {
+  grid-area: entrada;
+  box-sizing: border-box;
+  background-color: white;
+  padding-right: 15px;
+}
+
+main {
+  grid-area: saida;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.output_result {
+  box-sizing: border-box;
+  min-width: 100vh;
+  min-height: 100vh;
+  border-left: 2px solid #AAA;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+p {
+  text-align: justify;
+}
+
+h3 {
+  color: lightgrey;
+  opacity: 0.2;
+  margin-bottom: 100px;
+}
+
+h1 {
+  color: blue;
+}/*# sourceMappingURL=style.css.map */
